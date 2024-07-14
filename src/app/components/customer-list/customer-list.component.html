@@ -1,0 +1,116 @@
+<app-navbar></app-navbar>
+<div class="container mt-5">
+  <h2>Customers Transactions List</h2>
+
+  <div class="note mt-3">
+    <p><strong>Simple Customers Transactions List</strong></p>
+    <ul>
+      <li><strong>Search Bar:</strong> Type the name or amount you want to search.</li>
+      <li><strong>Dashboard:</strong>
+        <ul>
+          <li><strong>Sort Variables:</strong> Click on the column headers to sort the data.</li>
+          <li><strong>Graph Button:</strong> Click the graph icon next to a customer’s name to view their transaction graph.</li>
+          <li><strong>View Details Button:</strong>Click the "ViewDetails" button under the Action to view the users transaction Details .</li>
+        </ul>
+      </li>
+      <li><strong>Pagination:</strong> Use the controls at the bottom to change the number of customers displayed per page (from 5 to 10 customers per page).</li>
+      <li><strong>Note:</strong> The table shows each customer only once, with the total amount of their transactions .</li>
+    </ul>
+  </div>
+
+  <div class="d-flex">
+    <div class="main-table w-75">
+      <mat-form-field>
+        <mat-label class="mt-5">Search Name or Amount</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Ahmed">
+      </mat-form-field>
+
+      <div class="mat-elevation-z8 mt-3">
+        <table mat-table [dataSource]="dataSource" matSort>
+
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+            <td mat-cell *matCellDef="let row">{{ row.id }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+            <td mat-cell *matCellDef="let row">
+              <div class="name-cell">
+                {{ row.name }}
+                <button mat-icon-button (click)="viewGraph(row.id)">
+                  <mat-icon>insert_chart</mat-icon>
+                </button>
+              </div>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="total_amount">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Total Amount</th>
+            <td mat-cell *matCellDef="let row">{{ row.total_amount }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Actions</th>
+            <td mat-cell *matCellDef="let row">
+              <button mat-raised-button color="primary" (click)="viewDetails(row.id)">View Details</button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">No data matching the filter "{{ dataSource.filter }}"</td>
+          </tr>
+
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 6, 7, 8, 9, 10]" showFirstLastButtons></mat-paginator>
+
+        <!-- Chart Container -->
+        <div class="chart-container mt-4" *ngIf="selectedCustomer" style="width: 100%; height: 400px;">
+          <h3>Graph for {{ selectedCustomer.name }}</h3>
+          <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart" 
+                     [xaxis]="chartOptions.xaxis" [title]="chartOptions.title">
+          </apx-chart>
+        </div>
+      </div>
+    </div>
+
+    <div class="transaction-details w-25 ml-3" *ngIf="transactionDataSource.data.length">
+      <div class="d-flex justify-content-between align-items-center">
+        <h3>Transaction Details</h3>
+        <button mat-icon-button (click)="closeTransactionDetails()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+      <table mat-table [dataSource]="transactionDataSource" class="mat-elevation-z8 mt-3">
+
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>ID</th>
+          <td mat-cell *matCellDef="let row">{{ row.id }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="customer_id">
+          <th mat-header-cell *matHeaderCellDef>Customer ID</th>
+          <td mat-cell *matCellDef="let row">{{ row.customer_id }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef>Date</th>
+          <td mat-cell *matCellDef="let row">{{ row.date }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="amount">
+          <th mat-header-cell *matHeaderCellDef>Amount</th>
+          <td mat-cell *matCellDef="let row">{{ row.amount }}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="transactionColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: transactionColumns;"></tr>
+
+      </table>
+    </div>
+  </div>
+</div>

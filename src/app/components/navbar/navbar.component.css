@@ -1,0 +1,75 @@
+.navbar {
+    background-color: #f8f9fa; 
+    padding: 10px 20px;
+}
+
+.navbar-brand {
+    font-size: 1.5rem; 
+    font-weight: bold; /* Bold text */
+    color: #343a40; /* Darker text color */
+}
+
+.navbar-brand:hover {
+    color: #0056b3; /* Change color on hover */
+}
+
+.navbar-toggler {
+    border: none; /* Remove border */
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255, 255, 255, 0.5%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E"); /* Custom icon color */
+}
+
+.navbar-nav .nav-item .nav-link {
+    color: #343a40; /* Dark text color for links */
+    margin-right: 15px; /* Space between links */
+    font-size: 1.1rem; /* Slightly larger font size */
+}
+
+.navbar-nav .nav-item .nav-link:hover {
+    color: #0056b3; /* Change color on hover */
+}
+
+.navbar-nav .nav-item.active .nav-link {
+    color: #0056b3; /* Active link color */
+    font-weight: bold; /* Bold active link */
+}
+
+.navbar-nav .nav-item .dropdown-menu {
+    background-color: #ffffff; /* White background for dropdown */
+    border: 1px solid #dee2e6; /* Light border */
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15); /* Add shadow */
+}
+
+.navbar-nav .nav-item .dropdown-item {
+    color: #343a40; /* Dark text color for dropdown items */
+}
+
+.navbar-nav .nav-item .dropdown-item:hover {
+    background-color: #f8f9fa; /* Light background on hover */
+}
+
+.navbar-nav .nav-item .dropdown-divider {
+    border-top: 1px solid #dee2e6; /* Light border for divider */
+}
+
+.navbar-nav .nav-item .nav-link.disabled {
+    color: #6c757d; /* Disabled link color */
+}
+
+.form-inline .form-control {
+    margin-right: 10px; /* Space between input and button */
+    border-radius: 5px; /* Rounded corners */
+}
+
+.form-inline .btn {
+    border-radius: 5px; /* Rounded corners */
+    color: #ffffff; /* White text */
+    background-color: #28a745; /* Green button background */
+    border: none; /* Remove border */
+}
+
+.form-inline .btn:hover {
+    background-color: #218838; /* Darker green on hover */
+}
